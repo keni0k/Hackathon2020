@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>Eleonor</title>
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900italic,900' rel='stylesheet' type='text/css'>
 	<style>
 		body, .container {
 			width: 100%;
@@ -105,7 +106,7 @@
 			color: #195151;
 		}
 		.document-date {
-			padding-left: 151px;
+			padding-left: 131px;
 			padding-top: 13px;
 			font-family: Roboto;
 			font-style: normal;
@@ -158,12 +159,13 @@
 		}
 		.sections {
 			position: absolute;
-			width: 712px;
-			height: 981px;
+			width: 712px;			
 			margin-top: 29px;
 			background: #FFFFFF;
 			box-shadow: 0px 0px 5px rgba(25, 81, 81, 0.6);
 			border-radius: 5px;
+			margin-bottom: 20px;
+			padding-bottom: 20px;
 		}
 		.section {
 			margin-left: 20px;
@@ -230,6 +232,43 @@
 			padding: 10px 30px;
 			color: #FFFFFF;
 		}
+		.accordion-menu {
+			padding: 0;
+		}
+		.dropdownlink {
+			cursor: pointer;
+			font-family: Roboto;
+			font-style: normal;
+			color: #36393F;
+			border-radius: 4px;
+			margin: 14px 8px 17px;
+			padding: 11px 0 11px 64px;
+			font-weight: 500;
+			font-size: 14px;
+			line-height: 21px;
+			letter-spacing: 0.1px;
+		}
+		.open>.dropdownlink {
+			background: #D8F8F0;
+			color: #195151;
+		}
+		.open>ul>li{
+			list-style-type: disc;
+			height: 40px;
+		}
+		.open>ul>li>a{
+			text-decoration: none;
+			font-family: Roboto;
+			font-style: normal;
+			font-weight: normal;
+			font-size: 12px;
+			line-height: 21px;
+			letter-spacing: 0.1px;
+			color: #195151;
+		}
+		.section.active>p {
+			margin:10px;
+		}
 	</style>
 </head>
 
@@ -241,27 +280,53 @@
 				<p>Автоматизация бизнес-процессов</p>
 			</div>
 			<ul class="accordion-menu">
-				<li id="map_menu" class="open" v-on:click="onClickMap">
+				<li class="open">
 					<div class="dropdownlink">
-						<div class="icon icon-map"></div>
-						<div class="text">Карта</div>
+						<div class="icon icon-something"></div>
+						<div class="text">Инструкции 6</div>
 					</div>
-					<ul class="submenuItems" id="typeMap" style="display: block;">
-						<li v-on:click="onClickTypeMap" class="active"><a class="radiobtn radiobtn1"
-																		  href="#">Водоснабжение</a></li>
-						<li v-on:click="onClickTypeMap"><a class="radiobtn radiobtn2" href="#">Водоотведение</a></li>
-						<li v-on:click="onClickTypeMap"><a class="radiobtn radiobtn3" href="#">Теплоснабжение</a></li>
+					<ul class="submenuItems" id="typeMap">
+						<li class="active"><a class="radiobtn radiobtn1" href="#">Знакомство с компанией</a></li>
+						<li><a class="radiobtn radiobtn2" href="#">Программист предприятия торговли</a></li>
+						<li><a class="radiobtn radiobtn3" href="#">Инструкция по правилам ТБ</a></li>
+						<li><a class="radiobtn radiobtn4" href="#">Корпоративный этикет</a></li>
+						<li><a class="radiobtn radiobtn5" href="#">Система мотивации</a></li>
 					</ul>
 				</li>
-				<li id="fragment_menu">
+				<li>
 					<div class="dropdownlink">
 						<div class="icon icon-fragment"></div>
-						<div class="text">Фрагмент</div>
+						<div class="text">Сообщения</div>
 					</div>
 					<ul class="submenuItems" id="theSubMenuBtn">
-						<li><a href="#">Схема</a></li>
-						<li><a href="#" v-on:click="onClickInfo" class="btn-info">Информация</a></li>
-						<li><a href="#">История правок</a></li>
+						
+					</ul>
+				</li>
+				<li>
+					<div class="dropdownlink">
+						<div class="icon icon-fragment"></div>
+						<div class="text">Задачи 12</div>
+					</div>
+					<ul class="submenuItems" id="theSubMenuBtn">
+						
+					</ul>
+				</li>
+				<li>
+					<div class="dropdownlink">
+						<div class="icon icon-fragment"></div>
+						<div class="text">График</div>
+					</div>
+					<ul class="submenuItems" id="theSubMenuBtn">
+						
+					</ul>
+				</li>
+				<li>
+					<div class="dropdownlink">
+						<div class="icon icon-fragment"></div>
+						<div class="text">Показатели</div>
+					</div>
+					<ul class="submenuItems" id="theSubMenuBtn">
+						
 					</ul>
 				</li>
 			</ul>		
@@ -281,7 +346,13 @@
 			<div class="sections">
 				<button class="show-instruction-text">Смотреть полный текст инструкции</button>
 				<div class="section active">
-				Lorem ipsum
+					<p>1. Коммерческий агент относится к категории технических исполнителей.</p>
+					<p>2. На должность коммерческого агента назначается лицо, имеющее среднее профессиональное образование и специальная подготовка по установленной программе без предъявления требований к стажу работы.</p>
+					<p>3. Назначение на должность коммерческого агента и освобождение от нее производится приказом директора предприятия.</p>
+					<p>4. Коммерческий агент должен знать:</p>
+					<p>4.1. Нормативные правовые акты, положения, инструкции, другие руководящие материалы и документы, касающиеся ведения бизнеса.</p>
+					<p>4.2. Основы рыночной экономики.</p>
+					<p>4.3. Методы установления деловых контактов.</p>
 				</div>
 				<div class="section hidden">
 					<span>2. Функциональные обязанности</span>
