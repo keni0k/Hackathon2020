@@ -22,7 +22,13 @@ X_predict = pd.read_csv('data/predict.csv', encoding="cp1251", sep=";")
 X_predict_prepared = X_predict.drop({'filename'}, axis=1)
 
 def prepareSentence(morph, russian_stopwords, sentence):
-    words = nltk.word_tokenize(sentence)
+    try:
+        words = nltk.word_tokenize(sentence)
+    except:
+        try:
+            words = sentence.split()
+        except:
+            return ''
     words = [morph.parse(word)[0].normal_form for word in words]
     words = [token for token in words if token not in russian_stopwords\
           and token != " " \
