@@ -1,1 +1,227 @@
-﻿
+﻿html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    background-color: #0A415F;
+    font-family: Arial, Helvetica, sans-serif;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+a, a:active, a:hover, a:visited {
+    text-decoration: none;
+    color: #000;
+}
+
+.container-flex {
+    display: flex;
+    margin: auto;
+}
+
+.body {
+    vertical-align: top;
+    display: flex;
+    margin-bottom: 10px;
+}
+
+    .body.container-flex {
+        width: 1000px;
+        background: #FFFFFF;
+        border-radius: 5px;
+        margin-top: 10px;
+        padding: 10px;
+        height: 80%;
+    }
+
+/***************************************/
+
+/**  HEADER  ***************************/
+body > header.container-flex {
+    display: flex;
+    height: 40px;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.header {
+    width: 1000px;
+    background: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    font-size: 24px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+
+/**  LEFT  ******************************/
+.left_panel {
+    display: flex;
+    width: 250px;
+    border-left: 1px;
+    border-left-width: 3px;
+    flex-direction: column;
+    border-right: 1px solid #000;
+}
+
+    .left_panel .worker_info {
+        display: flex;
+        flex-direction: column;
+        margin: 15px;
+        padding-bottom: 20px;
+        border-bottom: 2px solid #0A415F;
+    }
+
+        .left_panel .worker_info .name {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .left_panel .worker_info .profession {
+            text-transform: uppercase;
+            font-size: smaller;
+        }
+
+    .left_panel .menu {
+        margin: 15px;
+    }
+
+        .left_panel .menu .btn_menu {
+            background: #e0e0e0;
+            line-height: 40px;
+            text-align: center;
+        }
+
+            .left_panel .menu .btn_menu:hover {
+                background: #ddd;
+                cursor: pointer;
+                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            }
+
+/**  RIGHT  ******************************/
+.right_panel {
+    width: 100%;
+    height: 100%;
+    margin: 10px 20px 10px 0px;
+    overflow: scroll;
+}
+
+    .right_panel .title {
+        text-align: center;
+        font-weight: bold;
+        font-size: 20px;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+
+
+    .right_panel > .content li {
+        list-style-type: none;
+        text-decoration: underline;
+        text-decoration-style: dotted;
+        padding: 10px 15px;
+        margin-right: 20px;
+        margin-bottom: 5px;
+        background: #fefefe;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+    }
+
+        .right_panel > .content li:hover {
+            cursor: pointer;
+            text-decoration: underline;
+            text-decoration-style: solid;
+            color: #0A415F;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
+
+
+/**  ACCORDION  **************************/
+
+.accordion {
+    margin: 50px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+    .accordion .trigger input[type="checkbox"] {
+        display: none;
+    }
+
+        .accordion .trigger input[type="checkbox"]:checked + label {
+            background-color: slategray;
+        }
+
+            .accordion .trigger input[type="checkbox"]:checked + label i:before {
+                transform: translate(5px,8px) rotate(45deg);
+            }
+
+            .accordion .trigger input[type="checkbox"]:checked + label i:after {
+                transform: translate(-5px,8px) rotate(-45deg);
+            }
+
+    .accordion .trigger .checkbox {
+        position: relative;
+        display: block;
+        width: 100%;
+        margin: 0;
+        color: white;
+        cursor: pointer;
+        background-color: #2E5277;
+    }
+
+        .accordion .trigger .checkbox .wrapper {
+            padding: 10px;
+        }
+
+        .accordion .trigger .checkbox i {
+            position: absolute;
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            right: 20px;
+        }
+
+            .accordion .trigger .checkbox i:before,
+            .accordion .trigger .checkbox i:after {
+                position: absolute;
+                content: '';
+                width: 16px;
+                height: 3px;
+                background-color: white;
+                transition: transform 250ms ease;
+            }
+
+            .accordion .trigger .checkbox i:before {
+                transform: translate(-5px,8px) rotate(45deg);
+            }
+
+            .accordion .trigger .checkbox i:after {
+                transform: translate(5px,8px) rotate(-45deg);
+            }
+
+    .accordion .trigger .content {
+        position: relative;
+        max-height: 1px;
+        padding: 0;
+        overflow-y: auto;
+        font-size: 14px;
+        line-height: 1.5;
+        background-color: whitesmoke;
+        transition: max-height 500ms ease-in-out;
+    }
+
+        .accordion .trigger .content h3 {
+            margin: 30px 0 15px 30px;
+        }
+
+        .accordion .trigger .content p {
+            margin: 0 30px 30px;
+        }
+
+    .accordion .trigger input[type="checkbox"]:checked ~ .content {
+        max-height: 5000px;
+        transition: max-height 500ms ease-in-out;
+    }

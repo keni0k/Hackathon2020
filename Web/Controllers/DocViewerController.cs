@@ -6,12 +6,12 @@ using System.Diagnostics;
 
 namespace cp2020.Controllers
 {
-    public class HomeController : Controller
+    public class DocViewerController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<DocViewerController> _logger;
         private readonly DbRepository _repository;
 
-        public HomeController(ILogger<HomeController> logger, DbRepository repository)
+        public DocViewerController(ILogger<DocViewerController> logger, DbRepository repository)
         {
             _logger = logger;
             _repository = repository;
