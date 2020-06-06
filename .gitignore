@@ -1,2 +1,5 @@
 /.hg
 /.hgignore
+/Web/.vs
+/Web/bin
+/Web/obj
