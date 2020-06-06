@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Eleonor</title>
+	<style>
+		body, .container {
+			width: 100%;
+			height: 100%;
+			margin: 0;
+			padding: 0;
+		}
+		body {
+			background: #4FB9A0;
+		}
+		.container {
+			position: absolute;
+		}
+		#left-menu {
+			position: absolute;
+			height: 100%;
+			width: 256px;
+			top: 0;
+			left: 0;
+			background: white;
+			z-index: 998;
+		}
+		div.logo {
+			position: absolute;
+			width: 256px;
+			height: 119px;
+			background: #195151;
+		}
+		div.logo>span {
+			position: absolute;
+			width: 187px;
+			height: 21px;
+			top: 43px;
+			left: 34px;
+			font-family: Montserrat;
+			font-style: normal;
+			font-weight: bold;
+			font-size: 36px;
+			line-height: 21px;
+			letter-spacing: 0.1px;
+			color: #FFFFFF;
+		}
+		div.logo>p {
+			position: absolute;
+			width: 188px;
+			height: 15px;
+			left: 34px;
+			bottom: 30px;
+			font-family: Roboto;
+			font-style: normal;
+			font-weight: normal;
+			font-size: 11px;
+			line-height: 30px;
+			letter-spacing: 0.15px;
+			color: #B9F2D7;
+		}
+		#left-menu>.accordion-menu {
+			position: relative;
+			width: 256px;
+			height: 950px;
+			top: 119px;
+		}
+		#main-panel {
+			position: absolute;
+			left: 256px;
+			padding-left: 28px;
+			padding-top: 14px;
+		}
+		.document {
+			display: inline-block;
+			width: 420px;
+			height: 79px;
+			box-shadow: 0px 0px 5px rgba(25, 81, 81, 0.6);
+			background: #FFFFFF;
+			border-radius: 5px;
+		}
+		.document-type {
+			width: 288px;
+			height: 26px;
+			padding-top: 7px;
+			padding-left: 20px;
+			font-family: Roboto;
+			font-style: normal;
+			font-weight: normal;
+			font-size: 20px;
+			line-height: 30px;
+			letter-spacing: 0.15px;
+			color: #A9AAAA;
+		}
+		.document-name {
+			display: block;
+			width: 329px;
+			height: 21px;
+			padding-left: 20px;
+			font-family: Roboto;
+			font-style: normal;
+			font-weight: bold;
+			font-size: 18px;
+			line-height: 30px;
+			letter-spacing: 0.15px;
+			color: #195151;
+		}
+		.document-date {
+			padding-left: 151px;
+			padding-top: 13px;
+			font-family: Roboto;
+			font-style: normal;
+			font-weight: normal;
+			font-size: 11px;
+			line-height: 30px;
+			letter-spacing: 0.15px;
+			color: #757575;
+		}
+		.document-visible-icon {
+			padding-top: 10px;
+			left: 410px;
+			position: absolute;
+		}
+		.account {
+			display: inline-block;
+			width: 280px;
+			height: 79px;
+			box-shadow: 0px 0px 5px rgba(25, 81, 81, 0.6);
+			background: #FFFFFF;
+			border-radius: 5px;
+			margin-left: 8px;
+		}
+		.acoount-name {
+			display: block;
+			width: 192px;
+			height: 26px;
+			padding-left: 64px;
+			padding-top: 7px;
+			font-family: Roboto;
+			font-style: normal;
+			font-weight: bold;
+			font-size: 20px;
+			line-height: 30px;
+			letter-spacing: 0.15px;
+			color: #36393F;
+		}
+		.account-position {
+			display: block;
+			width: 212px;
+			padding-left: 64px;
+			height: 15px;
+			font-family: Roboto;
+			font-style: normal;
+			font-weight: normal;
+			font-size: 16px;
+			line-height: 30px;
+			letter-spacing: 0.15px;
+			color: #A9AAAA;
+		}
+		.sections {
+			position: absolute;
+			width: 712px;
+			height: 981px;
+			margin-top: 29px;
+			background: #FFFFFF;
+			box-shadow: 0px 0px 5px rgba(25, 81, 81, 0.6);
+			border-radius: 5px;
+		}
+		.section {
+			margin-left: 20px;
+			width: calc(100% - 40px);
+			background: #FFFFFF;
+			border: 2px solid #195151;
+			box-sizing: border-box;
+			border-radius: 4px;
+			margin-bottom: 4px;
+		}
+		.section:first-of-type {
+			margin-top: 75px;
+		}
+		.section.active {
+			padding: 20px 16px;
+		}
+		.section.hidden {
+			background: #D2F3F8;
+			border-radius: 4px;
+			color: #195151;
+			padding: 10px 14px;
+		}
+		.section.hidden span {
+			font-family: Roboto;
+			font-style: normal;
+			font-weight: bold;
+			font-size: 18px;
+			line-height: 30px;
+			letter-spacing: 0.15px;
+		}
+		.show-instruction-text {
+			top: 23px;
+			right: 20px;
+			padding: 10px;
+			background: #4FB9A0;
+			box-shadow: 0px 1px 1px rgba(51, 149, 102, 0.3);
+			border-radius: 4px;
+			position: absolute;
+			font-family: Roboto;
+			font-style: normal;
+			font-weight: 500;
+			font-size: 14px;
+			line-height: 16px;
+			text-align: center;
+			text-transform: uppercase;
+			color: #FFFFFF;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<div id="left-menu">
+			<div class="logo">
+				<span>ELEONOR</span>
+				<p>Автоматизация бизнес-процессов</p>
+			</div>
+			<ul class="accordion-menu">
+				<li id="map_menu" class="open" v-on:click="onClickMap">
+					<div class="dropdownlink">
+						<div class="icon icon-map"></div>
+						<div class="text">Карта</div>
+					</div>
+					<ul class="submenuItems" id="typeMap" style="display: block;">
+						<li v-on:click="onClickTypeMap" class="active"><a class="radiobtn radiobtn1"
+																		  href="#">Водоснабжение</a></li>
+						<li v-on:click="onClickTypeMap"><a class="radiobtn radiobtn2" href="#">Водоотведение</a></li>
+						<li v-on:click="onClickTypeMap"><a class="radiobtn radiobtn3" href="#">Теплоснабжение</a></li>
+					</ul>
+				</li>
+				<li id="fragment_menu">
+					<div class="dropdownlink">
+						<div class="icon icon-fragment"></div>
+						<div class="text">Фрагмент</div>
+					</div>
+					<ul class="submenuItems" id="theSubMenuBtn">
+						<li><a href="#">Схема</a></li>
+						<li><a href="#" v-on:click="onClickInfo" class="btn-info">Информация</a></li>
+						<li><a href="#">История правок</a></li>
+					</ul>
+				</li>
+			</ul>		
+		</div>
+
+		<div id="main-panel">
+			<div class="document">
+				<span class="document-type">Инструкция:</span>
+				<span class="document-date">получена: 28.05.20</span>
+				<img class="document-visible-icon" src="visibility_24px.svg"/>
+				<span class="document-name">Программист предприятия торговли</span>
+			</div>
+			<div class="account">
+				<span class="acoount-name">Евгений Калинкин</span>
+				<span class="account-position">Инженер-программист</span>
+			</div>
+			<div class="sections">
+				<button class="show-instruction-text">Смотреть полный текст инструкции</button>
+				<div class="section active">
+				Lorem ipsum
+				</div>
+				<div class="section hidden">
+					<span>2. Функциональные обязанности</span>
+				</div>
+			</div>
+		</div>
+	<div>
+</body>
+
+</html>
