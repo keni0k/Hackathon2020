@@ -9,17 +9,26 @@ from sklearn.utils import shuffle
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 
 import pymorphy2
+from string import punctuation
 import nltk
 from nltk.corpus import stopwords
-from string import punctuation
-
-from catboost import CatBoostClassifier
 
 nltk.download('punkt')
 nltk.download('wordnet')
 nltk.download('stopwords')
-X_predict = pd.read_csv('data/predict.csv', encoding="cp1251", sep=";")
-X_predict_prepared = X_predict.drop({'filename'}, axis=1)
+
+from catboost import CatBoostClassifier
+
+class DenseCountVectorizer(sktext.CountVectorizer):
+    def transform(self, raw_documents, copy=True):
+        X = super().transform(raw_documents)
+        df = pd.DataFrame(X.toarray(), columns=self.get_feature_names())
+        return df
+
+    def fit_transform(self, raw_documents, y=None):
+        X = super().fit_transform(raw_documents, y=y)
+        df = pd.DataFrame(X.toarray(), columns=self.get_feature_names())
+        return df
 
 def prepareSentence(morph, russian_stopwords, sentence):
     try:
@@ -46,29 +55,31 @@ def prepareData(data):
     data['text'] = data.apply(lambda row: prepareSentence(morph, russian_stopwords, row['text']), axis=1)
     return data
 
-X_predict_prepared = prepareData(X_predict_prepared)
+def main(params):
+	input_file = 'data/predict.csv' if len(params) < 2 else params[1]
+	output_file = 'data/result.csv' if len(params) < 3 else params[2]
+	personification_techie = 0.5 if len(params) < 4 else float(params[3])
+	print(f'\nInput file: {input_file}')
+	print(f'Output file: {output_file}\n')
+	X_predict = pd.read_csv(input_file, encoding="cp1251", sep=";")
+	X_predict_prepared = X_predict.drop({'filename'}, axis=1)
+	X_predict_prepared = prepareData(X_predict_prepared)
 
-class DenseCountVectorizer(sktext.CountVectorizer):
-    def transform(self, raw_documents, copy=True):
-        X = super().transform(raw_documents)
-        df = pd.DataFrame(X.toarray(), columns=self.get_feature_names())
-        return df
+	vectorizer = joblib.load("vectorizer-light-person.pkl")
+	X_predict_vectorized = vectorizer.transform(X_predict_prepared['text'])
+	X_predict_vectorized['section_common'] = X_predict_prepared.section_common
+	X_predict_vectorized['section_respons'] = X_predict_prepared.section_respons
+	X_predict_vectorized['section_rights'] = X_predict_prepared.section_rights
+	X_predict_vectorized['section_tasks'] = X_predict_prepared.section_tasks
+	X_predict_vectorized['techie'] = personification_techie
 
-    def fit_transform(self, raw_documents, y=None):
-        X = super().fit_transform(raw_documents, y=y)
-        df = pd.DataFrame(X.toarray(), columns=self.get_feature_names())
-        return df
+	from_file = CatBoostClassifier()
+	from_file.load_model("model-light-person.cbm")
+	predict = list(map(lambda x: round(x[1], 2), from_file.predict_proba(X_predict_vectorized)))
+	X_predict['light'] = predict
+	X_predict.to_csv(output_file, sep = ';', encoding="cp1251")
 
-vectorizer = joblib.load("vectorizer-light.pkl")
-X_predict_vectorized = vectorizer.transform(X_predict_prepared['text'])
-X_predict_vectorized['section_common'] = X_predict_prepared.section_common
-X_predict_vectorized['section_respons'] = X_predict_prepared.section_respons
-X_predict_vectorized['section_rights'] = X_predict_prepared.section_rights
-X_predict_vectorized['section_tasks'] = X_predict_prepared.section_tasks
-
-from_file = CatBoostClassifier()
-
-from_file.load_model("model-light.cbm")
-predict = list(map(lambda x: round(x[1], 2), from_file.predict_proba(X_predict_vectorized)))
-X_predict['light'] = predict
-X_predict.to_csv('data/result.csv', sep = ';', encoding="cp1251")
+if __name__ == "__main__":
+	import sys
+	params = sys.argv
+	main(params)
